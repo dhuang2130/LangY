@@ -1,6 +1,6 @@
 # LangY
 
-![image](https://github.com/dhuang2130/LangY/assets/112297033/0c9b03db-9e25-49bd-a0fa-633ab9cb15cf)
+![image](https://github.com/dhuang2130/LangY/assets/112297033/3b09d53f-3467-46c7-86ec-abe0aa10f213)
 
 LangY is not just a programming language; it's an ecosystem for creative expression and powerful problem-solving. Inspired by the need for simplicity without sacrificing depth, LangY brings together the elegance of high-level abstractions with the robustness of static analysis. With LangY, coding becomes an art form, and every line of code tells a story.
 
