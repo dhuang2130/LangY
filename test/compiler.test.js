@@ -1,14 +1,7 @@
-import * as assert from "node:assert";
-import {compile} from "../src/LangY.js"
+import assert from "assert/strict"
 
-describe("Compiler", () => {
-    it("should compile", () => {
-        assert.equal(1+1, 2);
-    });
-});
-
-describe("LangY", () => {
-    it("should compile", () => {
-        assert.equal(compile(), "eventually this will return the compiled code");
-    });
-});
+describe("Equality Test", () => {
+  it("should return true when comparing 1 to 1", () => {
+    assert.equal(1 === 1, true)
+  })
+})

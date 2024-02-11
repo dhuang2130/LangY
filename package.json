@@ -2,12 +2,12 @@
   "name": "langy",
   "version": "1.0.0",
   "description": "LangY is my new language!",
-  "main": "index.js",
+  "main": "LangY.js",
   "type": "module",
   "scripts": {
     "test": "c8 mocha"
   },
-  "keywords": [],
+  "keywords": ["compiler", "ohm"],
   "author": "David Huang",
   "license": "MIT",
   "devDependencies": {

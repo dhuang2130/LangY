@@ -1,5 +1,3 @@
-console.log("started");
+import parse from "./parser.js"
 
-export function compile () {
-    return "eventually this will return the compiled code"
-}
+console.log(parse("print 1;"))
