@@ -1,42 +1,44 @@
 LangY {
   Program     = Stmt+
-  Stmt        = Assignment
-              | Print
-              | IfStmt
-              | WhileStmt
+  Stmt        = VarDecl
+              | TypeDecl
+              | FunDecl
               | BreakStmt
-  Assignment  = id "=" Exp ";"
-  Print       = print Exp ";"
-  IfStmt      = if Exp Block ElsePart?
-  ElsePart    = else IfStmt
-              | else Block
-  WhileStmt   = while Exp Block
-  Block       = "{" Stmt+ "}"
-  BreakStmt   = break ";"
+              | ReturnStmt
+              | PrintStmt
+              | IfStmt
+              | LoopStmt
+  VarDecl     = ("let" | "const") id "=" Exp ";"
+  TypeDecl    = "struct" id "{" Field* "}"
+  Field       = id ":" Type
+  FunDecl     = "fun" id Params? Block
+  Block       = "{" Stmt* "}"
+  IfStmt      = "if" Exp Block ("else" Block)?
+  LoopStmt    = ("loop" | "while") Exp Block
+  Params      = "(" ListOf<Param, ","> ")"
+  Param       = id ":" Type
+  BreakStmt   = "break" ";"
+  ReturnStmt  = "return" (Exp | ";")
+  PrintStmt   = "print" Exp ";"
   
   Exp         = Exp1 relop Exp1                        --comparison
               | Exp1
-  Exp1        = Exp1 ("+" | "-") Term                  --binary
+  Exp1        = Exp1 ("+" | "-") Term      --binary
               | Term
-  Term        = Term ("*" | "/" | "%") Factor          --binary
+  Term        = Term ("*" | "/" | "%") Factor   --binary
               | Factor
-  Factor      = Primary "**" Factor                    --binary
-              | "-" Primary                            --negation
-              | Primary
+  Factor = "-" Primary        --negation
+       | Primary
   Primary     = id "(" ListOf<Exp, ","> ")"            --call
               | numeral                                --num
               | id                                     --id
               | "(" Exp ")"                            --parens
   
-  relop       = "<=" | "<" | "==" | "!=" | ">=" | ">" 
-  numeral     = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
-  print       = "print" ~idchar
-  break       = "break" ~idchar
-  if          = "if" ~idchar
-  else        = "else" ~idchar
-  while       = "while" ~idchar
-  keyword     = print | break | if | else | while
+  relop = "<=" | "<" | "==" | "!=" | ">=" | ">"
+  numeral = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
+  keyword     = "print" | "break" | "if" | "else" | "while"
   idchar      = letter | digit | "_"
+  Type        = "int" | "float" | "bool" | "string" 
   id          = ~keyword letter idchar*
-  space      += "//" (~"\n" any)*                      --comment
+  comment = "//" (~"\n" any)* "\n"?
 }
