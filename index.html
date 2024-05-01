@@ -15,19 +15,14 @@ Modularity and Reusability: Encapsulate logic into modules and promote code reus
 Error Handling: Robust error handling mechanisms ensure graceful recovery from unexpected situations.
 Interoperability: Seamlessly integrate with existing codebases written in other languages for maximum flexibility.
 
-LangY
+# Github repo:
+https://github.com/dhuang2130/LangY
+
+
 ```
 // Hello, World in LangY
 print("Hello, World");
 ```
-
-Javascript
-```
-// Hello, World in JavaScript
-console.log("Hello, World");
-```
-
-LangY
 ```
 // Fibonacci Sequence in LangY
 function fibonacci(n): {
@@ -40,17 +35,37 @@ function fibonacci(n): {
 
 print(fibonacci(10));
 ```
-
-Javascript
 ```
-// Fibonacci Sequence in JavaScript
-function fibonacci(n) {
+// Factorial calculation in LangY
+function factorial(n): {
     if (n <= 1) {
-        return n;
+        return 1;
     } else {
-        return fibonacci(n - 1) + fibonacci(n - 2);
+        return n * factorial(n - 1);
     }
 }
 
-console.log(fibonacci(10));
+print(factorial(5)); // Output: 120
+
+```
+```
+// Sum of numbers program in LangY
+function sumOfNumbers(n): {
+    var sum = 0;
+    for (var i = 1; i <= n; i++) {
+        sum = sum + i;
+    }
+    return sum;
+}
+
+print(sumOfNumbers(10)); // Output: 55
+```
+```
+// Check if a number is even or odd in LangY
+func isEven(n): {
+    return n % 2 == 0;
+}
+
+print(isEven(7)); // Output: false
+print(isEven(10)); // Output: true
 ```
