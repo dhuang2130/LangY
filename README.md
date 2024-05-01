@@ -30,7 +30,7 @@ console.log("Hello, World");
 LangY
 ```
 // Fibonacci Sequence in LangY
-func fibonacci(n) {
+function fibonacci(n): {
     if (n <= 1) {
         return n;
     } else {
