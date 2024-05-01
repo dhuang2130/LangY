@@ -71,4 +71,4 @@ print(isEven(10)); // Output: true
 ```
 
 Developer: David Huang
-David is an aspiring computer scientist. 
+David is an aspiring computer scientist. His hobbies include playing piano and practicing Chinese. 
