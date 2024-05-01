@@ -1,57 +1,57 @@
 export function program(statements) {
-  return { kind: "Program", statements };
+  return { kind: "Program", statements }
 }
 
 export function variableDeclaration(variable, initializer) {
-  return { kind: "VariableDeclaration", variable, initializer };
+  return { kind: "VariableDeclaration", variable, initializer }
 }
 
-export function functionDeclaration(fun, params, returnType, body) {
-  return { kind: "FunctionDeclaration", fun, params, returnType, body };
+export function functionDeclaration(fun, params, body) {
+  return { kind: "FunctionDeclaration", fun, params, body }
 }
 
-export function breakStatement() {
-  return { kind: "BreakStatement" };
+export function assignment(target, source) {
+  return { kind: "Assignment", target, source }
 }
 
-export function returnStatement(argument) {
-  return { kind: "ReturnStatement", argument };
+export function whileStatement(test, body) {
+  return { kind: "WhileStatement", test, body }
 }
 
-export function ifStatement(test, consequent, alternate) {
-  return { kind: "IfStatement", test, consequent, alternate };
+export function printStatement(argument) {
+  return { kind: "PrintStatement", argument }
 }
 
-export function loopStatement(test, body) {
-  return { kind: "LoopStatement", test, body };
+export function call(callee, args) {
+  return { kind: "Call", callee, args }
 }
 
-export function binaryExpression(op, left, right) {
-  return { kind: "BinaryExpression", op, left, right };
+export function conditional(test, consequent, alternate) {
+  return { kind: "Conditional", test, consequent, alternate }
 }
 
-export function unaryExpression(op, operand) {
-  return { kind: "UnaryExpression", op, operand };
+export function binary(op, left, right) {
+  return { kind: "BinaryExpression", op, left, right }
 }
 
-export function callExpression(callee, args) {
-  return { kind: "CallExpression", callee, args };
+export function unary(op, operand) {
+  return { kind: "UnaryExpression", op, operand }
 }
 
-export function literal(value) {
-  return { kind: "Literal", value };
+export function variable(name, readOnly) {
+  return { kind: "Variable", name, readOnly }
 }
 
-export function identifier(name) {
-  return { kind: "Identifier", name };
+export function fun(name, paramCount) {
+  return { kind: "Function", name, paramCount }
 }
 
 export const standardLibrary = Object.freeze({
-  print: identifier("print"),
-  break: identifier("break"),
-  if: identifier("if"),
-  else: identifier("else"),
-  while: identifier("while"),
-  true: literal(true),
-  false: literal(false),
-});
+  π: variable("π", true),
+  sqrt: fun("sqrt", 1),
+  sin: fun("sin", 1),
+  cos: fun("cos", 1),
+  exp: fun("exp", 1),
+  ln: fun("ln", 1),
+  hypot: fun("hypot", 2),
+})

@@ -1,44 +1,44 @@
-LangY {
-  Program     = Stmt+
-  Stmt        = VarDecl
-              | TypeDecl
-              | FunDecl
-              | BreakStmt
-              | ReturnStmt
-              | PrintStmt
-              | IfStmt
-              | LoopStmt
-  VarDecl     = ("let" | "const") id "=" Exp ";"
-  TypeDecl    = "struct" id "{" Field* "}"
-  Field       = id ":" Type
-  FunDecl     = "fun" id Params? Block
-  Block       = "{" Stmt* "}"
-  IfStmt      = "if" Exp Block ("else" Block)?
-  LoopStmt    = ("loop" | "while") Exp Block
-  Params      = "(" ListOf<Param, ","> ")"
-  Param       = id ":" Type
-  BreakStmt   = "break" ";"
-  ReturnStmt  = "return" (Exp | ";")
-  PrintStmt   = "print" Exp ";"
-  
-  Exp         = Exp1 relop Exp1                        --comparison
-              | Exp1
-  Exp1        = Exp1 ("+" | "-") Term      --binary
-              | Term
-  Term        = Term ("*" | "/" | "%") Factor   --binary
-              | Factor
-  Factor = "-" Primary        --negation
-       | Primary
-  Primary     = id "(" ListOf<Exp, ","> ")"            --call
-              | numeral                                --num
-              | id                                     --id
-              | "(" Exp ")"                            --parens
-  
-  relop = "<=" | "<" | "==" | "!=" | ">=" | ">"
-  numeral = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
-  keyword     = "print" | "break" | "if" | "else" | "while"
-  idchar      = letter | digit | "_"
-  Type        = "int" | "float" | "bool" | "string" 
-  id          = ~keyword letter idchar*
-  comment = "//" (~"\n" any)* "\n"?
+langy {
+  Program   = Statement+
+  Statement = make id ":" Exp ";"                        -- vardec
+            | function id Params ":" Exp ";"            -- fundec
+            | Exp7_id ":" Exp ";"                       -- assign
+            | print Exp ";"                             -- print
+            | while Exp Block                           -- while
+  Params    = "(" ListOf<id, ","> ")"
+  Block     = "{" Statement* "}"
+
+  Exp       = ("-" | "!") Exp7                          -- unary
+            | Exp1 "?" Exp1 ":" Exp                     -- ternary
+            | Exp1
+  Exp1      = Exp1 "||" Exp2                            -- binary
+            | Exp2
+  Exp2      = Exp2 "&&" Exp3                            -- binary
+            | Exp3
+  Exp3      = Exp4 ("<="|"<"|"=="|"!="|">="|">") Exp4   -- binary
+            | Exp4
+  Exp4      = Exp4 ("+" | "-") Exp5                     -- binary
+            | Exp5
+  Exp5      = Exp5 ("*" | "/" | "%") Exp6               -- binary
+            | Exp6
+  Exp6      = Exp7 "**" Exp6                            -- binary
+            | Exp7
+  Exp7      = num
+            | true
+            | false
+            | id "(" ListOf<Exp, ","> ")"               -- call
+            | id                                        -- id
+            | "(" Exp ")"                               -- parens
+
+  make       = "make" ~idchar
+  function  = "function" ~idchar
+  while     = "whileLoop" ~idchar
+  true      = "true" ~idchar
+  false     = "false" ~idchar
+  print     = "print" ~idchar
+  keyword   = make | function | while | true | false
+  num       = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
+  id        = ~keyword letter idchar*
+  idchar    = letter | digit | "_"
+  space    += "//" (~"\n" any)*                         -- comment
 }
